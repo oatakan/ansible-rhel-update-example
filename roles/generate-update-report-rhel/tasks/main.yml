@@ -5,7 +5,7 @@
     api_key: "{{ sendgrid_api_key | default(omit) }}"
     from_address: "{{ sendgrid_from_email_address }}"
     to_addresses: "{{ sendgrid_to_email_addresses }}"
-    subject: "[Ansible] Windows Update report"
+    subject: "[Ansible] OS Update report"
     body: "{{ lookup('template', 'update_report.html.j2') }}"
     html_body: yes
   delegate_to: localhost
@@ -19,9 +19,12 @@
     username: "{{ smtp_account }}"
     password: "{{ smtp_account_password }}"
     to: "{{ smtp_to_email_addresses }}"
-    subject: "[Ansible] Windows Update report"
+    subject: "[Ansible] OS Update report"
     body: "{{ lookup('template', 'update_report.html.j2') }}"
     subtype: html
   delegate_to: localhost
   become: no
-  when: send_email_with_smtp | bool
+  when:
+    - send_email_with_smtp | bool
+    - smtp_account is defined
+    - smtp_account_password is defined
