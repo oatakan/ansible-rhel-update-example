@@ -1,0 +1,31 @@
+---
+
+- name: ensure kpatch service is enabled and started
+  service:
+    name: kpatch
+    state: started
+    enabled: yes
+
+- name: show current kernel version
+  debug:
+    msg: "{{ ansible_kernel }}"
+
+- name: debug
+  debug:
+    msg: "{{ ansible_kernel | replace('.','_') }}"
+
+- name: install kpatch
+  yum:
+    name: "kpatch-patch = {{ ansible_kernel }}"
+    state: latest
+  register: kpatch_patch_install
+
+- debug:
+    msg: "{{ kpatch_patch_install }}"
+
+#- name: wait for patch to be applied
+#  shell: kpatch list | grep "kpatch_{{ ansible_kernel | replace('.','_') }}
+#  register: kpatch_patch_status
+#  until: kpatch_patch_status is success
+#  delay: 5
+#  retries: "{{ kpatch_wait_retry_limit }}"
