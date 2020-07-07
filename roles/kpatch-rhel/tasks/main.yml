@@ -10,10 +10,6 @@
   debug:
     msg: "{{ ansible_kernel }}"
 
-- name: debug
-  debug:
-    msg: "{{ ansible_kernel | replace('.','_') }}"
-
 - name: install kpatch
   yum:
     name: "kpatch-patch = {{ ansible_kernel }}"
