@@ -23,7 +23,7 @@
   register: kpatch_patch_status
   until: kpatch_patch_status is success
   delay: 5
-  retries: "{{ kpatch_wait_retry_limit }}"
+  retries: 300
 
 - name: set enabled kpatch
   set_fact:
