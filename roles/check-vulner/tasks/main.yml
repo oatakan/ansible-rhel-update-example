@@ -12,6 +12,7 @@
 # we assume only one vulnerability in the list for now
 - name: set vulnerability facts
   set_stats:
+    per_host: yes
     data:
       security_system_vulnerable: "{{ 'true' if (vulner_info.stdout == '1') else 'false' }}"
       security_system_vulner_list: "{{ [vulner] if (vulner_info.stdout == '1') else [] }}"
