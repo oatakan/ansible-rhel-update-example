@@ -28,7 +28,7 @@
 - name: set enabled kpatch
   set_fact:
     enabled_kpatch: "{{ kpatch_patch_status.stdout }}"
-    cacheable: yes
+    cacheable: True
 
 - debug:
     msg: "{{ enabled_kpatch }}"
