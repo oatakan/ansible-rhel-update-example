@@ -1,11 +1,5 @@
 ---
 
-- name: ensure kpatch service is enabled and started
-  service:
-    name: kpatch
-    state: started
-    enabled: yes
-
 - name: show current kernel version
   debug:
     msg: "{{ ansible_kernel }}"
@@ -15,6 +9,12 @@
     name: "kpatch-patch = {{ ansible_kernel }}"
     state: latest
   register: kpatch_patch_install
+
+- name: ensure kpatch service is enabled and started
+  service:
+    name: kpatch
+    state: started
+    enabled: yes
 
 - name: wait for patch to be applied
   shell: |
