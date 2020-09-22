@@ -7,7 +7,7 @@
   failed_when: vulner_info.stdout not in ['0','1']
 
 - debug:
-    msg: "vulnerable?: {{ vulner_result['_' + vulner_info.stdout] }}"
+    msg: "vulnerable : {{ vulner_result['_' + vulner_info.stdout] }}"
 
 # we assume only one vulnerability in the list for now
 - name: set vulnerability facts
