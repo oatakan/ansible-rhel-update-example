@@ -3,3 +3,7 @@
 
   roles:
     - update-rhel
+
+  post_tasks:
+    - name: run the insights-client and upload to c.rh.c
+      shell: insights-client
