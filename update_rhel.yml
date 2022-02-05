@@ -7,3 +7,6 @@
   post_tasks:
     - name: run the insights-client and upload to c.rh.c
       shell: insights-client
+      when:
+        - ansible_distribution == 'RedHat'
+        - run_insights_client | default(False)
